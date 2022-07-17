@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 AWSCLIV2.pkg
 src/sql_app.db
+.vscode/settings.json
+
+/node_modules

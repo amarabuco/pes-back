@@ -10,7 +10,6 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -22,6 +21,17 @@ def get_db():
 @app.get("/")
 async def root():
     return {"message": "Hello Santos!!!"}
+
+@app.post("/requisicao",  response_model=schemas.Navio)
+async def requisicao(requisicao: schemas.RequisicaoBase, navio: schemas.Navio, db: Session = Depends(get_db)):
+    db_navio = crud.get_navio(db, imo=navio.imo)
+    print(db_navio)
+    if db_navio is None:
+        db_navio = crud.create_navio(db=db, navio=navio)
+    requisicao.navio = db_navio.imo
+    requisicao = crud.create_requisicao(db=db, requisicao=requisicao)
+    return requisicao
+
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):

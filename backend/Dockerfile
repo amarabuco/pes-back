@@ -7,4 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+EXPOSE 8000
+
+WORKDIR /usr/src/myapp/src
+
+CMD [ "uvicorn", "main:app", "--reload", "--host",  "0.0.0.0" ]   

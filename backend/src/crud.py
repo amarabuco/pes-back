@@ -14,6 +14,23 @@ def get_user_by_email(db: Session, email: str):
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
+def get_navio(db: Session, imo: int):
+    return db.query(models.Navio).filter(models.Navio.imo == imo).first()
+
+def create_navio(db: Session, navio: schemas.Navio):
+    db_navio = models.Navio(**navio.dict())
+    db.add(db_navio)
+    db.commit()
+    db.refresh(db_navio)
+    return db_navio
+
+def create_requisicao(db: Session, requisicao: schemas.RequisicaoBase):
+    db_requisicao = models.Requisicao(**requisicao.dict())
+    db.add(db_requisicao)
+    db.commit()
+    db.refresh(db_requisicao)
+    return db_requisicao
+
 
 def create_user(db: Session, user: schemas.UserCreate):
     fake_hashed_password = user.password + "notreallyhashed"

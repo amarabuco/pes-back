@@ -1,0 +1,30 @@
+#GET http://localhost:8000/
+
+POST http://localhost:8000/requisicao HTTP/1.1
+content-type: application/json
+
+{
+"requisicao": {
+    "DUV" : 218692022,
+    "ETA" : "2022-05-31 08:00:00",
+    "mercadoria" : "GASOLINA COMUM",
+    "peso" : 3290
+    },
+"navio": {
+    "nome": "T JUNGFRAU",
+    "loa": 195,
+    "imo": 123,
+    "boca": 10,
+    "dwt": 10,
+    "ab": 10,
+    "calado_entrada": 8,
+    "calado_saida": 8,
+    "calado_aereo": 8,
+    "pontal": 10,
+    "ano_construcao": 2000,
+    "ultimo_porto": "Suape",
+    "proximo_porto": "Itaqui"
+    }
+}
+
+#"ETA" : "31/05/2022 08:00:00",
