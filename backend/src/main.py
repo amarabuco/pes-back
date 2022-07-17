@@ -22,6 +22,26 @@ def get_db():
 async def root():
     return {"message": "Hello Santos!!!"}
 
+@app.get("/requisicao", response_model=List[schemas.RequisicaoBase])
+def read_reqs(db: Session = Depends(get_db)):
+    reqs = crud.get_reqs(db)
+    return reqs
+
+@app.get("/requisicao/{duv}", response_model=schemas.RequisicaoBase)
+def read_reqs(duv: int, db: Session = Depends(get_db)):
+    req = crud.get_req_by_duv(db, duv)
+    return req
+
+@app.get("/navios", response_model=List[schemas.Navio])
+def read_navios(db: Session = Depends(get_db)):
+    navios = crud.get_navios(db)
+    return navios
+
+@app.get("/navios/{imo}", response_model=schemas.Navio)
+def read_navios(imo: str, db: Session = Depends(get_db)):
+    navio = crud.get_navio_by_imo(db, imo)
+    return navio
+
 @app.post("/requisicao",  response_model=schemas.Navio)
 async def requisicao(requisicao: schemas.RequisicaoBase, navio: schemas.Navio, db: Session = Depends(get_db)):
     db_navio = crud.get_navio(db, imo=navio.imo)
