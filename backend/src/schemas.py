@@ -42,7 +42,7 @@ class Navio(BaseModel):
     nome: str = Field(default=None, title="Titanic", max_length=300)
     loa: float = Field(default=None, title="269")
     boca: float = Field(default=None, title="28.2")
-    dwt: float = Field(default=None, title="Titanic")
+    dwt: float
     ab: float
     calado_entrada: float = Field(default=None, title="10.5")
     calado_saida: float

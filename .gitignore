@@ -130,5 +130,3 @@ dmypy.json
 AWSCLIV2.pkg
 src/sql_app.db
 .vscode/settings.json
-
-/node_modules
