@@ -10,6 +10,17 @@ def get_user(db: Session, user_id: int):
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
+def get_reqs(db: Session):
+    return db.query(models.Requisicao).all()
+
+def get_req_by_duv(db: Session, duv: int):
+    return db.query(models.Requisicao).filter(models.Requisicao.DUV == duv).first()
+
+def get_navios(db: Session):
+    return db.query(models.Navio).all()
+
+def get_navio_by_imo(db: Session, imo: str):
+    return db.query(models.Navio).filter(models.Navio.imo == imo).first()
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
